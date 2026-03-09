@@ -1,0 +1,100 @@
+[00:00:01.837] Server  LOG     ✓ Ready in 1200ms
+[00:09:21.687] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
+[00:13:04.694] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
+[00:13:04.694] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
+[00:13:04.694] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
+[00:15:12.689] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
+[00:15:13.698] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
+[00:16:08.697] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
+[00:16:21.686] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
+[00:16:21.686] Browser ERROR   ./thinkmindlabs/package.json:9:5
+Error parsing package.json file
+   7 |     "build": "next build",
+   8 |     "start": "next start",
+>  9 |     // "export": "next build && next export"
+     |     ^
+  10 |   },
+  11 |   "dependencies": {
+  12 |     "framer-motion": "^11.0.0",
+
+package.json is not parseable: invalid JSON: key must be a string at line 9 column 5
