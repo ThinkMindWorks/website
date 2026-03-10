@@ -155,8 +155,9 @@ export default function Products() {
                     <a href={product.url} target={product.url.startsWith('http') ? '_blank' : '_self'} rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 24px', borderRadius: 999, background: product.accent, color: product.accent === '#ffdd00' ? '#000' : '#fff', fontSize: 14, fontWeight: 600, textDecoration: 'none', transition: 'opacity 0.2s' }}>
                       {product.urlLabel} →
                     </a>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: product.status === 'Live' ? '#00e5a0' : product.status === 'Coming Soon' ? '#ffdd00' : 'var(--color-text-muted)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                      {product.status === 'Live' ? '● ' : '○ '}{product.status}
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: product.status === 'Live' ? '#00e5a0' : product.status === 'Coming Soon' ? '#ffdd00' : 'var(--color-text-muted)', letterSpacing: '0.05em', textTransform: 'uppercase', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: product.status === 'Live' ? '#00e5a0' : product.status === 'Coming Soon' ? '#ffdd00' : 'var(--color-text-muted)', display: 'inline-block', flexShrink: 0 }} />
+                      {product.status}
                     </span>
                   </div>
                 </div>
@@ -177,13 +178,13 @@ export default function Products() {
         </div>
       </section>
 
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 768px) {
           .product-row { grid-template-columns: 1fr !important; }
           .product-row > div { order: unset !important; }
           .delivery-grid { grid-template-columns: 1fr !important; }
         }
-      `}</style>
+      `}} />
     </>
   )
 }

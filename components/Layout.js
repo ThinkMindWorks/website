@@ -76,11 +76,12 @@ export default function Layout({ children }) {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
+      <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`} style={{ zIndex: 10000 }}>
         <button
           className="mobile-menu-close"
           onClick={() => setMobileOpen(false)}
           aria-label="Close menu"
+          style={{ zIndex: 10001, position: 'absolute', top: 20, right: 20 }}
         >
           ✕
         </button>

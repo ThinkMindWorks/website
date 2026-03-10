@@ -17,7 +17,7 @@ const PRODUCTS = [
     title: 'OpenVoce.ai',
     bg: '#ff6200',
     textColor: '#000000',
-    image: 'https://framerusercontent.com/images/cak7U7dY4h898WLby7suvljdOcA.jpg?width=1200',
+    image: '/FreeAiChatbotopenvoce.png',
     url: 'https://openvoce.ai',
   },
   {
