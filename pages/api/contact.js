@@ -20,11 +20,20 @@ export default async function handler(req, res) {
   }
 
   // ── Gmail transporter using App Password ──
+  //const transporter = nodemailer.createTransport({
+  //  service: 'gmail',
+  //  auth: {
+  //    user: process.env.GMAIL_USER,       // your Gmail address e.g. yourname@gmail.com
+  //    pass: process.env.GMAIL_APP_PASSWORD, // 16-char Gmail App Password (not your login password)
+  //  },
+  //})
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
     auth: {
-      user: process.env.GMAIL_USER,       // your Gmail address e.g. yourname@gmail.com
-      pass: process.env.GMAIL_APP_PASSWORD, // 16-char Gmail App Password (not your login password)
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
     },
   })
 
@@ -74,11 +83,11 @@ export default async function handler(req, res) {
                   <!-- Fields -->
                   <table width="100%" cellpadding="0" cellspacing="0">
                     ${[
-                      ['Name', name],
-                      ['Email', email],
-                      ['Company', company || '—'],
-                      ['Topic', topic],
-                    ].map(([label, value]) => `
+        ['Name', name],
+        ['Email', email],
+        ['Company', company || '—'],
+        ['Topic', topic],
+      ].map(([label, value]) => `
                     <tr>
                       <td style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
                         <p style="margin:0 0 4px;font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;">${label}</p>
@@ -222,12 +231,20 @@ export default async function handler(req, res) {
   }
 
   try {
+    // ✅ ADD THIS HERE
+    console.log("ENV CHECK:", {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD ? "EXISTS" : "MISSING"
+    });
+
     // Send both emails in parallel
     await Promise.all([
       transporter.sendMail(notificationMail),
       transporter.sendMail(thankYouMail),
     ])
+
     return res.status(200).json({ success: true })
+
   } catch (err) {
     console.error('Email send error:', err)
     return res.status(500).json({ error: 'Failed to send email. Please try again.' })
