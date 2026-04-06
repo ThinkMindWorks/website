@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', company: '', topic: 'General', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', company: '', topic: 'General', message: '', attachment: null })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -12,10 +12,33 @@ export default function Contact() {
     setErrorMsg('')
 
     try {
+      let attachmentData = null;
+      let attachmentName = null;
+
+      if (form.attachment) {
+        attachmentName = form.attachment.name;
+        attachmentData = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(form.attachment);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+        });
+      }
+
+      const payload = {
+        name: form.name,
+        email: form.email,
+        company: form.company,
+        topic: form.topic,
+        message: form.message,
+        attachmentData,
+        attachmentName
+      };
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       })
       const data = await res.json()
 
@@ -68,7 +91,7 @@ export default function Contact() {
                 {[
                   { icon: '📍', label: 'Headquarters', value: 'Gurugram, Haryana, India' },
                   { icon: '📍', label: 'US Office', value: 'Palo Alto, CA — Bay Area' },
-                  { icon: '✉️', label: 'Email', value: 'ai@thinkmindlabs.com' },
+                  { icon: '✉️', label: 'Email', value: 'contact@thinkmindlabs.com' },
                   { icon: '🕐', label: 'Response time', value: 'Within 24 hours' },
                 ].map(info => (
                   <div key={info.label} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
@@ -103,7 +126,7 @@ export default function Contact() {
                     Thanks for reaching out, <strong style={{ color: 'var(--color-text-primary)' }}>{form.name.split(' ')[0]}</strong>. We've sent a confirmation to <strong style={{ color: 'var(--accent-orange)' }}>{form.email}</strong> and will reply within 24 hours.
                   </p>
                   <button
-                    onClick={() => { setStatus('idle'); setForm({ name: '', email: '', company: '', topic: 'General', message: '' }) }}
+                    onClick={() => { setStatus('idle'); setForm({ name: '', email: '', company: '', topic: 'General', message: '', attachment: null }) }}
                     className="btn btn-ghost"
                     style={{ border: '1px solid var(--color-border)', color: 'var(--color-text-primary)' }}
                   >
@@ -168,6 +191,17 @@ export default function Contact() {
                       <option>Press &amp; Media</option>
                       <option>Careers</option>
                     </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Attachment</label>
+                    <input
+                      type="file"
+                      className="form-input"
+                      onChange={e => setForm({ ...form, attachment: e.target.files[0] || null })}
+                      disabled={status === 'sending'}
+                      style={{ padding: '10px' }}
+                    />
                   </div>
 
                   <div className="form-group">

@@ -1,11 +1,19 @@
 import nodemailer from 'nodemailer'
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { name, email, company, topic, message } = req.body
+  const { name, email, company, topic, message, attachmentData, attachmentName } = req.body
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Name, email and message are required.' })
@@ -20,10 +28,10 @@ export default async function handler(req, res) {
     },
   })
 
-  // ── 1. Notification email → ai@thinkmindlabs.com ──
+  // ── 1. Notification email → contact@thinkmindlabs.com ──
   const notificationMail = {
     from: `"ThinkMindLabs Contact" <${process.env.GMAIL_USER}>`,
-    to: 'ai@thinkmindlabs.com',
+    to: 'contact@thinkmindlabs.com',
     replyTo: email,
     subject: `[Contact Form] ${topic} — ${name}`,
     html: `
@@ -112,6 +120,12 @@ export default async function handler(req, res) {
       </body>
       </html>
     `,
+    attachments: (attachmentData && attachmentName) ? [
+      {
+        filename: attachmentName,
+        path: attachmentData
+      }
+    ] : [],
   }
 
   // ── 2. Thank-you auto-reply → sender's email ──
@@ -193,7 +207,7 @@ export default async function handler(req, res) {
                   </p>
                   <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.2);font-family:monospace;">
                     This is an automated confirmation. Please don't reply to this email —
-                    <a href="mailto:ai@thinkmindlabs.com" style="color:#ff6200;text-decoration:none;">ai@thinkmindlabs.com</a>
+                    <a href="mailto:contact@thinkmindlabs.com" style="color:#ff6200;text-decoration:none;">contact@thinkmindlabs.com</a>
                     for direct contact.
                   </p>
                 </td>

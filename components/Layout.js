@@ -129,7 +129,7 @@ export default function Layout({ children }) {
                 <li><Link href="/about">About</Link></li>
                 <li><Link href="/notes">Notes</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
-                <li><a href="https://thinkmindlabs.com" target="_blank" rel="noopener">Careers</a></li>
+                <li><Link href="/contact">Careers</Link></li>
               </ul>
             </div>
 

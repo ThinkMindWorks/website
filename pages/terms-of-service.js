@@ -135,7 +135,7 @@ export default function TermsOfService() {
         <h2>14. Contact</h2>
         <ul>
           <li><strong>Legal:</strong> <a href="mailto:legal@thinkmindlabs.com">legal@thinkmindlabs.com</a></li>
-          <li><strong>General:</strong> <a href="mailto:ai@thinkmindlabs.com">ai@thinkmindlabs.com</a></li>
+          <li><strong>General:</strong> <a href="mailto:contact@thinkmindlabs.com">contact@thinkmindlabs.com</a></li>
           <li><strong>Address:</strong> ThinkMindLabs Private Limited, Cyber City, Gurugram, Haryana 122002, India</li>
         </ul>
       </LegalPage>

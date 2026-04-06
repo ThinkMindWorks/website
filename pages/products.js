@@ -14,7 +14,7 @@ const PRODUCTS = [
     badge: 'World\'s Fastest',
     accent: '#ff6200',
     bg: 'linear-gradient(135deg, #1a0d00 0%, #111 100%)',
-    image: 'https://framerusercontent.com/images/cak7U7dY4h898WLby7suvljdOcA.jpg?width=1200',
+    image: 'https://www.thinkmindlabs.com/FreeAiChatbotopenvoce.png?width=1200',
     url: 'https://openvoce.ai',
     urlLabel: 'Visit openvoce.ai',
   },
@@ -30,7 +30,7 @@ const PRODUCTS = [
     badge: "World's 1st AI Stack as a Service",
     accent: '#7c6fff',
     bg: 'linear-gradient(135deg, #0a0714 0%, #111 100%)',
-    image: 'https://framerusercontent.com/images/xKHWSysrgFe1ub1CxmcYLHQdpc.jpg?width=800',
+    image: '/pravhero2.png?width=800',
     url: 'https://pravakta.ai',
     urlLabel: 'Visit pravakta.ai',
   },
@@ -178,7 +178,8 @@ export default function Products() {
         </div>
       </section>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @media (max-width: 768px) {
           .product-row { grid-template-columns: 1fr !important; }
           .product-row > div { order: unset !important; }

@@ -17,7 +17,7 @@ const PRODUCTS = [
     title: 'OpenVoce.ai',
     bg: '#ff6200',
     textColor: '#000000',
-    image: '/FreeAiChatbotopenvoce.png',
+    image: '/openvocheroban1.png',
     url: 'https://openvoce.ai',
   },
   {
@@ -26,7 +26,7 @@ const PRODUCTS = [
     title: 'Pravakta.ai',
     bg: '#0a0a1a',
     textColor: '#7c6fff',
-    image: 'https://framerusercontent.com/images/xKHWSysrgFe1ub1CxmcYLHQdpc.jpg?width=800',
+    image: '/pravhero1.png',
     url: 'https://pravakta.ai',
   },
   {

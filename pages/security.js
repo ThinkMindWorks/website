@@ -169,7 +169,7 @@ export default function Security() {
         <ul>
           <li><strong>Security incidents and vulnerability reports:</strong> <a href="mailto:security@thinkmindlabs.com">security@thinkmindlabs.com</a></li>
           <li><strong>Enterprise security enquiries:</strong> <a href="mailto:enterprise@thinkmindlabs.com">enterprise@thinkmindlabs.com</a></li>
-          <li><strong>General security questions:</strong> <a href="mailto:ai@thinkmindlabs.com">ai@thinkmindlabs.com</a></li>
+          <li><strong>General security questions:</strong> <a href="mailto:contact@thinkmindlabs.com">contact@thinkmindlabs.com</a></li>
           <li><strong>Status and uptime:</strong> <a href="https://status.thinkmindlabs.com" target="_blank" rel="noopener">status.thinkmindlabs.com</a></li>
           <li><strong>Address:</strong> ThinkMindLabs Private Limited, Cyber City, Gurugram, Haryana 122002, India</li>
         </ul>
