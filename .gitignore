@@ -1,9 +1,18 @@
+# Dependencies
 node_modules/
+
+# Next.js build
 .next/
 out/
+
+# Logs
+*.log
+
+# Environment variables
 .env
 .env.local
-*.log
-env.download
-gitignore
-{app/
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
