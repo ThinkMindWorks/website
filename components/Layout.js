@@ -24,6 +24,7 @@ export default function Layout({ children }) {
 
   const navLinks = [
     { href: '/products', label: 'Products' },
+    { href: '/consult', label: 'Consult' },
     { href: '/ai-stack', label: 'AI Stack' },
     { href: '/about', label: 'About' },
     { href: '/notes', label: 'Notes' },
@@ -127,6 +128,7 @@ export default function Layout({ children }) {
               <p className="footer-col-title">Company</p>
               <ul className="footer-links">
                 <li><Link href="/about">About</Link></li>
+                <li><Link href="/consult">AI Consulting</Link></li>
                 <li><Link href="/notes">Notes</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
                 <li><Link href="/contact">Careers</Link></li>
