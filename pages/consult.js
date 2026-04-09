@@ -77,9 +77,15 @@ export default function Consult() {
         body: JSON.stringify({ problem }),
       })
 
-      const data = await res.json()
+      let data
+      try {
+        data = await res.json()
+      } catch {
+        throw new Error('Server returned an invalid response. Please try again.')
+      }
 
-      if (!res.ok) throw new Error(data.error || 'Failed to generate response.')
+      if (!res.ok) throw new Error(data?.error || 'Failed to generate response.')
+      if (!data?.result) throw new Error('Empty response from AI. Please try again.')
 
       setAiResponse(data.result)
       setPhase('response')

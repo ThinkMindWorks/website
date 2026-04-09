@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" data-scroll-behavior="smooth">
       <Head>
         <meta charSet="utf-8" />
         <meta name="description" content="ThinkMindLabs — AI Lab building deployment-ready AI products. OpenVoce.ai, Pravakta.ai, TalkBuy.ai, AgentForDoc.ai." />
