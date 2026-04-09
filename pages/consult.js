@@ -70,36 +70,17 @@ export default function Consult() {
     setAiResponse(null)
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/consult', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: `You are an AI consulting strategist at ThinkMindLabs, an AI Lab that builds deployment-ready AI products for enterprises. 
-A potential enterprise client has submitted their business problem statement. 
-Respond with a concise, structured "Quick Draft Solution Overview" that:
-1. Shows you understand their problem
-2. Proposes a concrete AI solution approach (agents, models, integrations)
-3. Outlines 3-4 key deliverables
-4. Gives a rough indicative timeline
-5. Ends with a clear next step to schedule a discovery call
-
-Format your response using these exact section headers:
-**Problem Understanding**
-**Recommended AI Approach**  
-**Key Deliverables**
-**Indicative Timeline**
-**Our Recommendation**
-
-Keep it sharp, expert, and specific. Max 400 words. No fluff. Write for a CTO or VP of Digital at a large enterprise.`,
-          messages: [{ role: 'user', content: `Business Problem Statement:\n\n${problem}` }],
-        }),
+        body: JSON.stringify({ problem }),
       })
 
       const data = await res.json()
-      const text = data.content?.[0]?.text || ''
-      setAiResponse(text)
+
+      if (!res.ok) throw new Error(data.error || 'Failed to generate response.')
+
+      setAiResponse(data.result)
       setPhase('response')
     } catch (err) {
       setAiResponse('We encountered an issue generating your overview. Please describe your challenge to our team directly — we will respond within 24 hours.')
