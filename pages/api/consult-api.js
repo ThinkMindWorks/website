@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   }
 
   if (!process.env.ANTHROPIC_API_KEY) {
-    return res.status(500).json({ error: 'API key not configured.' })
+    return res.status(500).json({ error: 'ANTHROPIC_API_KEY is not set. Please add it in Hostinger → Environment Variables.' })
   }
 
   try {
@@ -42,14 +42,17 @@ Format your response using these exact section headers:
 
 Keep it sharp, expert, and specific. Max 400 words. No fluff. Write for a CTO or VP of Digital at a large enterprise.`,
         messages: [
-          { role: 'user', content: `Business Problem Statement:\n\n${problem}` }
+          {
+            role: 'user',
+            content: `Business Problem Statement:\n\n${problem}`,
+          },
         ],
       }),
     })
 
     if (!response.ok) {
       const err = await response.json()
-      throw new Error(err?.error?.message || 'Anthropic API error')
+      throw new Error(err?.error?.message || `Anthropic API error: ${response.status}`)
     }
 
     const data = await response.json()

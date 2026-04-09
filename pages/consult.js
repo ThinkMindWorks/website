@@ -63,6 +63,7 @@ export default function Consult() {
   const [aiResponse, setAiResponse] = useState(null)
   const [scheduleForm, setScheduleForm] = useState({ name: '', email: '', phone: '', company: '' })
   const [scheduleStatus, setScheduleStatus] = useState('idle') // idle | sending | success
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleProblemSubmit = async () => {
     if (!problem.trim() || problem.trim().length < 30) return
@@ -83,8 +84,8 @@ export default function Consult() {
       setAiResponse(data.result)
       setPhase('response')
     } catch (err) {
-      setAiResponse('We encountered an issue generating your overview. Please describe your challenge to our team directly — we will respond within 24 hours.')
-      setPhase('response')
+      setErrorMsg(err.message || 'Failed to generate a response.')
+      setPhase('error')
     }
   }
 
@@ -298,6 +299,34 @@ export default function Consult() {
                   <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 6 }}>Analysing your problem statement…</p>
                   <p style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>Our AI is generating your custom solution overview</p>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {phase === 'error' && (
+            <div style={{ background: 'var(--color-bg-elevated)', border: '1px solid rgba(255,60,60,0.25)', borderRadius: 'var(--radius-xl)', padding: '32px' }}>
+              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', marginBottom: 20 }}>
+                <span style={{ fontSize: 24, flexShrink: 0 }}>⚠️</span>
+                <div>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 6 }}>Could not generate response</p>
+                  <p style={{ fontSize: 13, color: '#ff6060', lineHeight: 1.65, fontFamily: 'var(--font-mono)' }}>{errorMsg}</p>
+                </div>
+              </div>
+              <div style={{ background: 'rgba(255,98,0,0.06)', border: '1px solid rgba(255,98,0,0.15)', borderRadius: 'var(--radius-md)', padding: '16px 18px', marginBottom: 20 }}>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, marginBottom: 4 }}>
+                  <strong style={{ color: 'var(--color-text-primary)' }}>Most likely cause:</strong> The <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12, background: 'rgba(255,255,255,0.08)', padding: '1px 6px', borderRadius: 4 }}>OPENAI_API_KEY</code> environment variable is not set on Hostinger.
+                </p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65 }}>
+                  Go to <strong style={{ color: 'var(--color-text-primary)' }}>hPanel → your website → Environment Variables</strong> and add <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12, background: 'rgba(255,255,255,0.08)', padding: '1px 6px', borderRadius: 4 }}>OPENAI_API_KEY</code> with your key from <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" style={{ color: 'var(--accent-orange)' }}>platform.openai.com</a>.
+                </p>
+              </div>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                <button onClick={() => { setPhase('idle'); setErrorMsg('') }} className="btn btn-ghost" style={{ border: '1px solid var(--color-border)', color: 'var(--color-text-secondary)', fontSize: 13 }}>
+                  ← Try again
+                </button>
+                <button onClick={() => setPhase('schedule')} className="btn btn-orange" style={{ padding: '10px 24px', fontSize: 13 }}>
+                  Schedule a Call Instead →
+                </button>
               </div>
             </div>
           )}
