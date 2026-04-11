@@ -64,6 +64,7 @@ export default function Consult() {
   const [scheduleForm, setScheduleForm] = useState({ name: '', email: '', phone: '', company: '' })
   const [scheduleStatus, setScheduleStatus] = useState('idle') // idle | sending | success
   const [errorMsg, setErrorMsg] = useState('')
+  const [metadata, setMetadata] = useState(null)
 
   const handleProblemSubmit = async () => {
     if (!problem.trim() || problem.trim().length < 30) return
@@ -71,9 +72,20 @@ export default function Consult() {
     setAiResponse(null)
 
     try {
+      const clientId = typeof window !== 'undefined'
+        ? (localStorage.getItem('tml_client_id') || (() => {
+          const id = Math.random().toString(36).slice(2)
+          localStorage.setItem('tml_client_id', id)
+          return id
+        })())
+        : 'anonymous'
+
       const res = await fetch('/api/consult', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Client-ID': clientId,
+        },
         body: JSON.stringify({ problem }),
       })
 
@@ -84,10 +96,13 @@ export default function Consult() {
         throw new Error('Server returned an invalid response. Please try again.')
       }
 
-      if (!res.ok) throw new Error(data?.error || 'Failed to generate response.')
-      if (!data?.result) throw new Error('Empty response from AI. Please try again.')
+      if (res.status === 429) throw new Error(`Rate limit reached. Please try again in ${data?.retryAfter || 60} seconds.`)
+      if (res.status === 400) throw new Error(data?.details?.[0] || data?.error || 'Invalid input.')
+      if (!res.ok) throw new Error(data?.message || data?.error || 'Failed to generate response.')
+      if (!data?.brief) throw new Error('Empty response from AI. Please try again.')
 
-      setAiResponse(data.result)
+      setAiResponse(data.brief)
+      setMetadata(data.metadata || null)
       setPhase('response')
     } catch (err) {
       setErrorMsg(err.message || 'Failed to generate a response.')
@@ -105,19 +120,27 @@ export default function Consult() {
 
   const formatAiResponse = (text) => {
     if (!text) return null
-    const sections = text.split(/\*\*(.+?)\*\*/).filter(Boolean)
-    const result = []
-    for (let i = 0; i < sections.length; i += 2) {
-      const heading = sections[i]
-      const content = sections[i + 1] || ''
-      if (content.trim()) {
-        result.push({ heading: heading.trim(), content: content.trim() })
-      } else if (!sections[i + 1] && heading) {
-        // plain text
-        result.push({ heading: null, content: heading })
+    // Parse ## markdown section headers
+    const lines = text.split('\n')
+    const sections = []
+    let currentHeading = null
+    let currentLines = []
+
+    for (const line of lines) {
+      if (line.startsWith('## ')) {
+        if (currentLines.length > 0 || currentHeading) {
+          sections.push({ heading: currentHeading, content: currentLines.join('\n').trim() })
+        }
+        currentHeading = line.replace(/^##\s+/, '').trim()
+        currentLines = []
+      } else {
+        currentLines.push(line)
       }
     }
-    return result
+    if (currentLines.length > 0 || currentHeading) {
+      sections.push({ heading: currentHeading, content: currentLines.join('\n').trim() })
+    }
+    return sections.filter(s => s.content || s.heading)
   }
 
   const parsed = formatAiResponse(aiResponse)
@@ -311,21 +334,16 @@ export default function Consult() {
 
           {phase === 'error' && (
             <div style={{ background: 'var(--color-bg-elevated)', border: '1px solid rgba(255,60,60,0.25)', borderRadius: 'var(--radius-xl)', padding: '32px' }}>
-              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', marginBottom: 20 }}>
+              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', marginBottom: 24 }}>
                 <span style={{ fontSize: 24, flexShrink: 0 }}>⚠️</span>
                 <div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 6 }}>Could not generate response</p>
-                  <p style={{ fontSize: 13, color: '#ff6060', lineHeight: 1.65, fontFamily: 'var(--font-mono)' }}>{errorMsg}</p>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 8 }}>Could not generate response</p>
+                  <p style={{ fontSize: 13, color: '#ff6060', lineHeight: 1.65, fontFamily: 'var(--font-mono)', marginBottom: 0 }}>{errorMsg}</p>
                 </div>
               </div>
-              <div style={{ background: 'rgba(255,98,0,0.06)', border: '1px solid rgba(255,98,0,0.15)', borderRadius: 'var(--radius-md)', padding: '16px 18px', marginBottom: 20 }}>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, marginBottom: 4 }}>
-                  <strong style={{ color: 'var(--color-text-primary)' }}>Most likely cause:</strong> The <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12, background: 'rgba(255,255,255,0.08)', padding: '1px 6px', borderRadius: 4 }}>OPENAI_API_KEY</code> environment variable is not set on Hostinger.
-                </p>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65 }}>
-                  Go to <strong style={{ color: 'var(--color-text-primary)' }}>hPanel → your website → Environment Variables</strong> and add <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12, background: 'rgba(255,255,255,0.08)', padding: '1px 6px', borderRadius: 4 }}>OPENAI_API_KEY</code> with your key from <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" style={{ color: 'var(--accent-orange)' }}>platform.openai.com</a>.
-                </p>
-              </div>
+              <p style={{ fontSize: 13, color: 'var(--color-text-muted)', lineHeight: 1.65, marginBottom: 20 }}>
+                Please try again or schedule a call directly — our consulting team will respond within 24 hours.
+              </p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <button onClick={() => { setPhase('idle'); setErrorMsg('') }} className="btn btn-ghost" style={{ border: '1px solid var(--color-border)', color: 'var(--color-text-secondary)', fontSize: 13 }}>
                   ← Try again
@@ -341,12 +359,28 @@ export default function Consult() {
             <div>
               {/* AI response */}
               <div style={{ background: 'var(--color-bg-elevated)', border: '1px solid rgba(255,98,0,0.2)', borderRadius: 'var(--radius-xl)', padding: '32px', marginBottom: 24 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24, paddingBottom: 20, borderBottom: '1px solid var(--color-border)' }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 8, background: 'var(--accent-orange)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>🧠</div>
-                  <div>
-                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 2 }}>Quick Draft Solution Overview</p>
-                    <p style={{ fontSize: 12, color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)' }}>Generated by ThinkMindLabs AI · Review with our consultants</p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 24, paddingBottom: 20, borderBottom: '1px solid var(--color-border)', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 8, background: 'var(--accent-orange)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>🧠</div>
+                    <div>
+                      <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 2 }}>Structured Consulting Brief</p>
+                      <p style={{ fontSize: 12, color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)' }}>ThinkMindLabs AI · Review with our consultants</p>
+                    </div>
                   </div>
+                  {metadata && (
+                    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                      {[
+                        { label: 'Model', value: 'Haiku 3.5' },
+                        { label: 'Tokens', value: metadata.outputTokens },
+                        { label: 'Time', value: `${(metadata.processingTimeMs / 1000).toFixed(1)}s` },
+                      ].map(m => (
+                        <div key={m.label} style={{ textAlign: 'right' }}>
+                          <p style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{m.label}</p>
+                          <p style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--accent-orange)', fontWeight: 600 }}>{m.value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {parsed.map((section, i) => (
@@ -460,7 +494,8 @@ export default function Consult() {
         </div>
       </section>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes consultSpin {
           to { transform: rotate(360deg); }
         }
