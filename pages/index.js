@@ -12,7 +12,7 @@ const HERO_LINES = [
 
 const PRODUCTS = [
   {
-    year: '2024',
+    year: '2026',
     category: 'Voice & Text AI Agent · SaaS',
     title: 'OpenVoce.ai',
     bg: '#ff6200',
@@ -21,7 +21,7 @@ const PRODUCTS = [
     url: 'https://openvoce.ai',
   },
   {
-    year: '2024',
+    year: '2026',
     category: 'Enterprise AI Voice Stack · PaaS',
     title: 'Pravakta.ai',
     bg: '#0a0a1a',
@@ -29,6 +29,7 @@ const PRODUCTS = [
     image: '/pravhero1.png',
     url: 'https://pravakta.ai',
   },
+  /*
   {
     year: '2025',
     category: 'Retail Conversational AI · PaaS',
@@ -47,13 +48,14 @@ const PRODUCTS = [
     image: 'https://framerusercontent.com/images/B4iHZ4n8YkDGgjtcjPiGagMwMzA.jpg?width=800',
     url: 'https://agentfordoc.ai',
   },
+  */
 ]
 
 const MARQUEE_ITEMS = [
-  'OpenVoce.ai', 'Pravakta.ai', 'TalkBuy.ai', 'AgentForDoc.ai',
-  'Voice AI', 'Generative AI', 'Sovereign AI Stack', 'AI Native',
-  'OpenVoce.ai', 'Pravakta.ai', 'TalkBuy.ai', 'AgentForDoc.ai',
-  'Voice AI', 'Generative AI', 'Sovereign AI Stack', 'AI Native',
+  'AI Agents', 'Voice Intelligence', 'Conversational AI', 'Multimodal AI',
+  'LLM Infrastructure', 'Enterprise AI', 'Autonomous Workflows', 'AI Automation',
+  'Knowledge AI', 'Real-time AI', 'AI Orchestration', 'Agentic Systems',
+  'Speech AI', 'Generative AI', 'Private AI Stack', 'AI Native Platform',
 ]
 
 const PILLARS = [
@@ -168,14 +170,14 @@ export default function Home() {
             </p>
             <div className="hero-actions animate-in delay-3">
               <Link href="/products" className="btn btn-orange">Explore Our Products →</Link>
-              <Link href="/about" className="btn btn-ghost" style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'var(--color-text-primary)' }}>Meet the Lab</Link>
+              <Link href="/consult" className="btn btn-ghost" style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'var(--color-text-primary)' }}>Enterprise AI Consulting →</Link>
             </div>
             <div className="hero-stats animate-in delay-4">
               {[
-                { value: '4', label: 'Live Products' },
-                { value: '5 min', label: 'To Deploy' },
-                { value: '100+', label: 'AI Workers' },
-                { value: '3', label: 'Delivery Models' },
+                { value: '2', label: 'Live Products' },
+                { value: '15 min', label: 'To Deploy' },
+                { value: '100%', label: 'Ai Builds' },
+                { value: '50+', label: 'AI Workers' },
               ].map((s, i) => (
                 <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
                   {i > 0 && <div className="hero-stat-divider" />}

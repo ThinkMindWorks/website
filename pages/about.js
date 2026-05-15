@@ -18,12 +18,12 @@ const VALUES = [
 ]
 
 const MILESTONES = [
-  { year: '2023', event: 'ThinkMindLabs founded in Gurugram by enterprise veterans with 100+ years of industry experience.' },
-  { year: '2024 Q1', event: 'OpenVoce.ai launched — world\'s fastest AI concierge agent. Zero to live in under 5 minutes.' },
-  { year: '2024 Q3', event: 'Pravakta.ai launched — world\'s first AI Stack as a Service with 100+ pre-trained voice agents.' },
-  { year: '2025 Q1', event: 'TalkBuy.ai goes live — conversational retail AI for eCommerce, D2C and quick commerce.' },
-  { year: '2025 Q2', event: 'AgentForDoc.ai launched — clinical AI agent for hospitals and healthcare providers.' },
-  { year: '2025+', event: 'TallyAgent, FinOps Agent, RecruitAgent in build. The lab never stops shipping.' },
+  { year: '2025', event: 'ThinkMindLabs founded in Gurugram by enterprise veterans with 100+ years of industry experience.' },
+  { year: '2026 Q1', event: 'OpenVoce.ai launched — world\'s fastest AI concierge agent. Zero to live in under 5 minutes.' },
+  { year: '2026 Q2', event: 'Pravakta.ai launched — world\'s first AI Stack as a Service with 100+ pre-trained voice agents.' },
+  { year: '2026 Q3', event: 'TalkBuy.ai launching soon — conversational retail AI for eCommerce, D2C and quick commerce.' },
+  { year: '2026 Q4', event: 'AgentForDoc.ai launching soon — clinical AI agent for hospitals and healthcare providers.' },
+  { year: '2026+', event: 'TallyAgent, FinOps Agent, RecruitAgent in build. The lab never stops shipping.' },
 ]
 
 export default function About() {
@@ -75,7 +75,10 @@ export default function About() {
               <p className="section-body" style={{ marginBottom: 28 }}>
                 Our products are an outcome of obsessing over real enterprise pain points. We have seen these problems from the inside — as operators, as technology leaders, as builders. Now we are solving them with AI.
               </p>
-              <Link href="/products" className="btn btn-orange">See Our Products →</Link>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <Link href="/products" className="btn btn-orange">See Our Products →</Link>
+                <Link href="/consult" className="btn btn-ghost" style={{ border: '1px solid rgba(255,255,255,0.12)', padding: '14px 24px', color: 'var(--color-text-primary)' }}>Enterprise AI Consulting →</Link>
+              </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
               {MILESTONES.map((m, i) => (

@@ -42,12 +42,12 @@ const PRODUCTS = [
     subtitle: 'Sell more in conversation',
     desc: "A voice and text retail AI agent powered by your catalog, prices, and inventory. Customers browse, ask questions, watch reviews, get how-to help and transact — all in natural conversation. Built for eCommerce, D2C, dropshipping, marketplace and quick-commerce brands.",
     features: ['Catalog-powered AI agent', 'In-conversation transactions', 'eCommerce & offline retail', 'D2C, dropshipping, marketplace'],
-    status: 'Live',
+    status: 'Coming Soon',
     accent: '#00e5a0',
     bg: 'linear-gradient(135deg, #001a10 0%, #111 100%)',
     image: 'https://framerusercontent.com/images/v2Cxh5gAzf3y5i5rvV7stpdreY.jpg?width=800',
-    url: 'https://talkbuy.ai',
-    urlLabel: 'Visit talkbuy.ai',
+    url: '/contact',
+    urlLabel: 'Join Waitlist',
   },
   {
     tag: 'Enterprise · Clinical AI Agent',
@@ -57,12 +57,12 @@ const PRODUCTS = [
     subtitle: 'AI medical coordinator, always available',
     desc: "A clinically trained voice and text AI agent that listens to doctor-patient interactions, infers clinical understanding, summarises diagnosis and answers anything about patient records, reports, scans and prescriptions in natural conversation. Integrates with HIS, ERP and medical systems.",
     features: ['Live consultation listener', 'Patient record Q&A (GPT-like)', 'HIS / ERP integration', 'Near real-time updates'],
-    status: 'Live',
+    status: 'Coming Soon',
     accent: '#38bdf8',
     bg: 'linear-gradient(135deg, #001627 0%, #111 100%)',
     image: 'https://framerusercontent.com/images/B4iHZ4n8YkDGgjtcjPiGagMwMzA.jpg?width=800',
-    url: 'https://agentfordoc.ai',
-    urlLabel: 'Visit agentfordoc.ai',
+    url: '/contact',
+    urlLabel: 'Join Waitlist',
   },
   {
     tag: 'Coming Soon',
@@ -174,6 +174,7 @@ export default function Products() {
           <p className="cta-subtitle">We build sovereign AI stacks for enterprises. Your infrastructure, your data, your AI.</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/contact" className="btn btn-orange" style={{ padding: '14px 32px', fontSize: 15 }}>Talk to Our Team →</Link>
+            <Link href="/consult" className="btn btn-ghost" style={{ border: '1px solid rgba(255,255,255,0.12)', padding: '14px 32px', fontSize: 15, color: 'var(--color-text-primary)' }}>Enterprise AI Consulting →</Link>
           </div>
         </div>
       </section>

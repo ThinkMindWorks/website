@@ -170,101 +170,24 @@ export default function Consult() {
       </div>
 
       {/* TRUST BAR */}
-      <div style={{ borderBottom: '1px solid var(--color-border)', borderTop: '1px solid var(--color-border)', padding: '20px 0' }}>
+      <div style={{ borderBottom: '1px solid var(--color-border)', borderTop: '1px solid var(--color-border)', padding: '40px 0' }}>
         <div className="container">
-          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 32, alignItems: 'flex-start' }}>
             {[
-              { value: '100+', label: 'Years enterprise experience' },
-              { value: '5 min', label: 'To first working AI agent' },
-              { value: '4', label: 'Live AI products deployed' },
-              { value: '6', label: 'Enterprise sectors served' },
+              { value: '100+', label: 'Years of Combined Enterprise Expertise', desc: 'Deep multi-industry experience drawn from decades of building and scaling enterprise systems.' },
+              { value: '1 Day', label: 'To Your First Operational AI Agent', desc: 'Rapid deployment framework that enables enterprises to launch a functioning agent in days, not months.' },
+              { value: '100%', label: 'Battle-Tested AI Delivery Model', desc: 'Methodologies shaped by delivering reliable AI outcomes for enterprise clients across industries.' },
+              { value: '6', label: 'Distinct Enterprise Verticals Supported', desc: 'Delivering AI transformation across multiple sectors with repeatable, domain-specific playbooks.' },
             ].map(s => (
-              <div key={s.label} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <span style={{ fontFamily: 'var(--font-display)', fontSize: 28, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--accent-orange)' }}>{s.value}</span>
-                <span style={{ fontSize: 12, color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 500 }}>{s.label}</span>
+              <div key={s.label} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--accent-orange)', lineHeight: 1 }}>{s.value}</span>
+                <span style={{ fontSize: 14, color: 'var(--color-text-primary)', fontWeight: 700, lineHeight: 1.3 }}>{s.label}</span>
+                <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>{s.desc}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      {/* CONSULTING PRACTICES */}
-      <section className="section">
-        <div className="container">
-          <span className="section-label">Our Practice Areas</span>
-          <h2 className="section-title">End-to-end AI<br /><em>consulting</em> for enterprise</h2>
-          <p style={{ fontSize: 15, color: 'var(--color-text-secondary)', lineHeight: 1.75, maxWidth: 560, marginBottom: 40 }}>
-            We cover every phase of enterprise AI adoption — from first discovery to production deployment and beyond.
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="consult-grid-3">
-            {PRACTICES.map(p => (
-              <div key={p.title} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', padding: '24px 22px', transition: 'border-color 0.3s' }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,98,0,0.3)'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-border)'}
-              >
-                <div style={{ fontSize: 28, marginBottom: 14 }}>{p.icon}</div>
-                <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 10, letterSpacing: '-0.02em', lineHeight: 1.3 }}>{p.title}</p>
-                <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: 16 }}>{p.desc}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                  {p.tags.map(tag => (
-                    <span key={tag} style={{ fontSize: 11, padding: '3px 10px', borderRadius: 999, background: 'rgba(255,98,0,0.08)', color: 'var(--accent-orange)', fontFamily: 'var(--font-mono)', letterSpacing: '0.02em', border: '1px solid rgba(255,98,0,0.15)' }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTORS */}
-      <section className="section" style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,98,0,0.02), transparent)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <span className="section-label">Industry Focus</span>
-            <h2 className="section-title">AI built for<br /><em>your sector</em></h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }} className="consult-grid-3">
-            {SECTORS.map(s => (
-              <div key={s.name} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', padding: '20px 20px', display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                <span style={{ fontSize: 26, flexShrink: 0 }}>{s.icon}</span>
-                <div>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 4, letterSpacing: '-0.01em' }}>{s.name}</p>
-                  <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PROCESS */}
-      <section className="section" id="process">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'flex-start' }} className="consult-two-col">
-            <div>
-              <span className="section-label">How We Work</span>
-              <h2 className="section-title">From problem<br />to <em>production</em><br />in 10 weeks</h2>
-              <p style={{ fontSize: 15, color: 'var(--color-text-secondary)', lineHeight: 1.75 }}>
-                We run tight, focused AI build cycles. No waterfall. No 6-month discovery phases. Just fast, iterative delivery with working product at every milestone.
-              </p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-              {PROCESS.map((step, i) => (
-                <div key={step.num} style={{ display: 'flex', gap: 20, paddingBottom: 24, paddingTop: i === 0 ? 0 : 24, borderBottom: i < PROCESS.length - 1 ? '1px solid var(--color-border)' : 'none', alignItems: 'flex-start' }}>
-                  <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent-orange)', letterSpacing: '0.06em' }}>{step.num}</span>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--color-text-muted)', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>{step.time}</span>
-                  </div>
-                  <div>
-                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 4, letterSpacing: '-0.01em' }}>{step.title}</p>
-                    <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.65 }}>{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* PROBLEM STATEMENT FORM */}
       <section className="section" id="problem" style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,98,0,0.03), transparent)' }}>
@@ -479,6 +402,84 @@ export default function Consult() {
               )}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* CONSULTING PRACTICES */}
+      <section className="section">
+        <div className="container">
+          <span className="section-label">Our Practice Areas</span>
+          <h2 className="section-title">End-to-end AI<br /><em>consulting</em> for enterprise</h2>
+          <p style={{ fontSize: 15, color: 'var(--color-text-secondary)', lineHeight: 1.75, maxWidth: 560, marginBottom: 40 }}>
+            We cover every phase of enterprise AI adoption — from first discovery to production deployment and beyond.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="consult-grid-3">
+            {PRACTICES.map(p => (
+              <div key={p.title} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', padding: '24px 22px', transition: 'border-color 0.3s' }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,98,0,0.3)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-border)'}
+              >
+                <div style={{ fontSize: 28, marginBottom: 14 }}>{p.icon}</div>
+                <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 10, letterSpacing: '-0.02em', lineHeight: 1.3 }}>{p.title}</p>
+                <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: 16 }}>{p.desc}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {p.tags.map(tag => (
+                    <span key={tag} style={{ fontSize: 11, padding: '3px 10px', borderRadius: 999, background: 'rgba(255,98,0,0.08)', color: 'var(--accent-orange)', fontFamily: 'var(--font-mono)', letterSpacing: '0.02em', border: '1px solid rgba(255,98,0,0.15)' }}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTORS */}
+      <section className="section" style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,98,0,0.02), transparent)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <span className="section-label">Industry Focus</span>
+            <h2 className="section-title">AI built for<br /><em>your sector</em></h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }} className="consult-grid-3">
+            {SECTORS.map(s => (
+              <div key={s.name} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-xl)', padding: '20px 20px', display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                <span style={{ fontSize: 26, flexShrink: 0 }}>{s.icon}</span>
+                <div>
+                  <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 4, letterSpacing: '-0.01em' }}>{s.name}</p>
+                  <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="section" id="process">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'flex-start' }} className="consult-two-col">
+            <div>
+              <span className="section-label">How We Work</span>
+              <h2 className="section-title">From problem<br />to <em>production</em><br />in 10 weeks</h2>
+              <p style={{ fontSize: 15, color: 'var(--color-text-secondary)', lineHeight: 1.75 }}>
+                We run tight, focused AI build cycles. No waterfall. No 6-month discovery phases. Just fast, iterative delivery with working product at every milestone.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+              {PROCESS.map((step, i) => (
+                <div key={step.num} style={{ display: 'flex', gap: 20, paddingBottom: 24, paddingTop: i === 0 ? 0 : 24, borderBottom: i < PROCESS.length - 1 ? '1px solid var(--color-border)' : 'none', alignItems: 'flex-start' }}>
+                  <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent-orange)', letterSpacing: '0.06em' }}>{step.num}</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--color-text-muted)', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>{step.time}</span>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: 4, letterSpacing: '-0.01em' }}>{step.title}</p>
+                    <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.65 }}>{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
