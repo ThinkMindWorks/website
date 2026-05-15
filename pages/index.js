@@ -98,9 +98,9 @@ function FolderCard({ product, index, openIndex, setOpenIndex }) {
           </svg>
         </div>
       </div>
-      <div style={{ maxHeight: isOpen ? '500px' : '0px', overflow: 'hidden', transition: 'max-height 0.6s cubic-bezier(0.23,1,0.32,1)' }}>
+      <div style={{ maxHeight: isOpen ? '800px' : '0px', overflow: 'hidden', transition: 'max-height 0.6s cubic-bezier(0.23,1,0.32,1)' }}>
         <div style={{ position: 'relative' }}>
-          <img src={product.image} alt={product.title} style={{ width: '100%', height: 400, objectFit: 'cover', display: 'block', transform: isOpen ? 'scale(1)' : 'scale(1.06)', transition: 'transform 0.65s cubic-bezier(0.23,1,0.32,1)' }} />
+          <img src={product.image} alt={product.title} style={{ width: '100%', height: 'auto', aspectRatio: '16/9', maxHeight: '500px', objectFit: 'cover', display: 'block', transform: isOpen ? 'scale(1)' : 'scale(1.06)', transition: 'transform 0.65s cubic-bezier(0.23,1,0.32,1)' }} />
           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '55%', background: `linear-gradient(to bottom, transparent, ${product.bg})`, pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: 24, left: 28, right: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: isOpen ? 1 : 0, transform: isOpen ? 'translateY(0)' : 'translateY(14px)', transition: 'opacity 0.3s ease 0.25s, transform 0.3s ease 0.25s' }}>
             <a href={product.url} target="_blank" rel="noopener" onClick={e => e.stopPropagation()} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 22px', borderRadius: 999, background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(14px)', color: '#fff', fontSize: 13, fontWeight: 600, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.18)' }}>

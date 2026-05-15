@@ -41,6 +41,7 @@ export default async function handler(req, res) {
   const notificationMail = {
     from: `"ThinkMindLabs Contact" <${process.env.GMAIL_USER}>`,
     to: 'contact@thinkmindlabs.com',
+    cc: 'sam@thinkmindlabs.com',
     replyTo: email,
     subject: `[Contact Form] ${topic} — ${name}`,
     html: `
@@ -193,14 +194,21 @@ export default async function handler(req, res) {
                   <!-- CTAs -->
                   <table cellpadding="0" cellspacing="0">
                     <tr>
-                      <td style="padding-right:12px;">
+                      <td style="padding-right:12px; padding-bottom:12px;">
                         <a href="https://thinkmindlabs.com/products" style="display:inline-block;background:#ff6200;color:#fff;text-decoration:none;padding:12px 24px;border-radius:999px;font-size:14px;font-weight:600;">
                           Explore Platform →
                         </a>
                       </td>
-                      <td>
+                      <td style="padding-bottom:12px;">
                         <a href="https://thinkmindlabs.com/notes" style="display:inline-block;background:rgba(255,255,255,0.06);color:#fff;text-decoration:none;padding:12px 24px;border-radius:999px;font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,0.12);">
                           Read our Notes
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <a href="https://www.thinkmindlabs.com/consult/#problem" style="display:inline-block;background:rgba(255,255,255,0.06);color:#fff;text-decoration:none;padding:12px 24px;border-radius:999px;font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,0.12);">
+                          State your problem statement →
                         </a>
                       </td>
                     </tr>
